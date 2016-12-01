@@ -68,18 +68,14 @@ if((typeof process) !== 'undefined') {
 
 		var log = function(s) { console.log(s); }
 
-		var seq = 0;
-		var f = function(cb, arg) {
-			var s = ++seq
-			log(s+" running: arg="+arg);
-			var b = Math.random() >= 0.5;
+		var f = function(cb, n) {
+			log(n+" running");
+			var b = Math.random() >= 0.6;
 			if(b) {
-				log(s+": generating error");
-				cb(s+": error!", "extra error info");
+				cb("ERROR", "occurred in "+n);
 			}
 			else  {
-				log(s+": returning normally");
-				cb(null, arg+" okay-"+s);
+				cb(null, n + 1);
 			}
 		}
 
@@ -87,8 +83,8 @@ if((typeof process) !== 'undefined') {
 		.add(f)
 		.add(f)
 		.run(function(e, r) {
-			log("finished:  e="+e+" r="+JSON.stringify(r));
-		}, "very_first_arg");
+			log("finished:  e='"+e+"',  r='"+JSON.stringify(r)+"'")
+		}, 1)
 
 	}
 
