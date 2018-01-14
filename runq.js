@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 
 
-var runq = function(done) {
+var runq = function() {
 
 	var o = {};
 
